@@ -3,10 +3,10 @@
 int main()
 {
 
-    int size_table, type_function, type_technique;
+    int table_size, type_function, type_technique;
     std::cout << "\tBúsquedas por dispersión" << std::endl;
     std::cout << "--Introduzca el tamaño de la tabla: ";
-    std::cin >> size_table;
+    std::cin >> table_size;
     std::cout << "--Función de dispersión a utilizar: " << std::endl;
     std::cout << "1. Módulo  " << std::endl;
     std::cout << "2. Suma  " << std::endl;
@@ -23,9 +23,9 @@ int main()
         std::cout << "Array de listas enlazadas" << std::endl;
     else if (type_technique == 2)
     {
-        int size_block, op_exploration;
+        int block_size, op_exploration;
         std::cout << "--Introduzca el tamaño del bloque: ";
-        std::cin >> size_block;
+        std::cin >> block_size;
         std::cout << "--Función de exploración " << std::endl;
         std::cout << "1. Exploración Lineal  " << std::endl;
         std::cout << "2. Exploración Cuadrática  " << std::endl;
