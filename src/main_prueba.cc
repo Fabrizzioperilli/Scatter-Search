@@ -8,6 +8,10 @@
 #include "../include/FeQuadratic.h"
 #include "../include/FeDoubleDispersion.h"
 #include "../include/FeRedispersion.h"
+#include "../include/Sequence.h"
+#include "../include/List.h"
+#include "../include/Block.h"
+
 
 int main()
 {
@@ -48,6 +52,56 @@ int main()
   default:
     break;
   }
+
+  Sequence<int> *seq;
+  int op_seq = 2;
+  switch (op_seq)
+  {
+  case 1:
+    std::cout << "--Dispesión Abierta--" << std::endl;
+    seq = new List<int>();
+    break;
+  case 2:
+    std::cout << "--Dispesión Cerrada--" << std::endl;
+    seq = new Block<int>(4);
+    break;
+  default:
+    break;
+  }
+
+  unsigned n1 = 10;
+  unsigned n2 = 20;
+  unsigned n3 = 30;
+  unsigned n4 = 40;
+
+  std::cout << "Insert n1 = " << n1 << "-->";
+  (seq->Insert(n1)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+  
+  std::cout << "Insert n2 = " << n2 << "-->";
+  (seq->Insert(n2)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+
+  std::cout << "Insert n3 = " << n3 << "-->";
+  (seq->Insert(n3)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+  
+  std::cout << "Search n4 = " << n4 << "-->";
+  (seq->Search(n4)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+
+  std::cout << "Search n2 = " << n2 << "-->";
+  (seq->Search(n2)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+ 
+  std::cout << "Insert n1 = " << n1 << "-->";
+  (seq->Insert(n1)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+  
+  std::cout << "Is Full -->";
+  (seq->IsFull()) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+
+  std::cout << "Insert n4 = " << n4 << "-->";
+  (seq->Insert(n4)) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+
+  std::cout << "Is Full -->";
+  (seq->IsFull()) ? std::cout << " true " << std::endl : std::cout << " false " << std::endl;
+
+
 
   std::cout << "Función de dispersión: " << fd->operator()(1234) << std::endl;
   std::cout << "Función de exploración: " << fe->operator()(1234, 5) << std::endl;
