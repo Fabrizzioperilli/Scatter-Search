@@ -67,6 +67,9 @@ int main()
   int n8 = 10;
   int n9 = 1;
   int n10 = 8;
+  int n11 = 29;
+  int n12 = 30;
+  int n13 = 51;
 
   std::cout << ".....HashTable......" << std::endl;
   
@@ -111,6 +114,15 @@ int main()
 
   std::cout << "Search n10 = " << n10 << " --> ";
   hash_table->Search(n10);
+
+  std::cout << "Insert n11 = " << n11 << " --> ";
+  hash_table->Insert(n11);
+
+  std::cout << "Insert n12 = " << n12 << " --> ";
+  hash_table->Insert(n12);
+
+  std::cout << "Insert n13 = " << n13 << " --> ";
+  hash_table->Insert(n13);
 
   return 0;
 }

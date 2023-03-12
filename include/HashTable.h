@@ -47,14 +47,8 @@ HashTable<Key>::HashTable(unsigned table_size, DispersionFunction<Key> *fd, Expl
 template <class Key>
 HashTable<Key>::~HashTable()
 {
-  if (fe_ == nullptr)
-    delete[] table_;
-  else
-  {
-    for (size_t i = 0; i < table_size_; i++)
-      delete table_[i];
-    delete[] table_;
-  }
+  for (size_t i = 0; i < table_size_; i++)
+    delete table_[i];
 }
 
 template <class Key>
@@ -64,31 +58,33 @@ bool HashTable<Key>::Insert(const Key &k) const
 
   if (fe_ == nullptr)
   {
-    if (table_[index]->Search(k))
+    if (table_[index]->Insert(k))
+    {
+      std::cout << "Key inserted in position: " << index << std::endl;
+      return true;
+    }
+    else
     {
       std::cout << "Key already exists" << std::endl;
       return false;
     }
-
-    table_[index]->Insert(k);
-    std::cout << "Key inserted in position: " << index << std::endl;
-    return true;
   }
   else
   {
     for (size_t i = 0; i < table_size_; ++i)
     {
       unsigned exploration_index = (index + fe_->operator()(k, i)) % table_size_;
-      if (table_[exploration_index]->Search(k))
+      if (table_[exploration_index]->Insert(k))
+      {
+        std::cout << "Key inserted in position: " << exploration_index << std::endl;
+        return true;
+      }
+      else if (table_[exploration_index]->IsFull())
+        continue;
+      else
       {
         std::cout << "Key already exists" << std::endl;
         return false;
-      }
-      else
-      {
-        table_[exploration_index]->Insert(k);
-        std::cout << "Key inserted in position: " << exploration_index << std::endl;
-        return true;
       }
     }
   }
@@ -116,7 +112,7 @@ bool HashTable<Key>::Search(const Key &k) const
   }
   else
   {
-    for (size_t i = 0; i < table_size_; i++)
+    for (size_t i = 0; i < table_size_; ++i)
     {
       unsigned exploration_index = (index + fe_->operator()(k, i)) % table_size_;
       if (table_[exploration_index]->Search(k))
@@ -124,6 +120,8 @@ bool HashTable<Key>::Search(const Key &k) const
         std::cout << "Key found in position: " << exploration_index << std::endl;
         return true;
       }
+      else if (table_[exploration_index]->IsFull())
+        continue;
       else
       {
         std::cout << "Key not found" << std::endl;
