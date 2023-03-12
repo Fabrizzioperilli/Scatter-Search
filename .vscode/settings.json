@@ -1,6 +1,8 @@
 {
+  "cmake.sourceDirectory": "/mnt/c/Users/fabri/Documents/Fabrizzio/Universidad/5_AÑO/AEDA/Practicas/4.Scatter_search",
   "files.associations": {
-    "*.tpp": "cpp"
-  },
-  "terminal.integrated.shell.windows": "cmd.exe"
+    "*.tcc": "cpp",
+    "functional": "cpp",
+    "random": "cpp"
+  }
 }
