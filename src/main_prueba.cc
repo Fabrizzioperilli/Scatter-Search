@@ -29,7 +29,7 @@ int main()
   }
 
   HashTable<int> *hash_table;
-  int op_seq = 2;
+  int op_seq = 1;
   if (op_seq == 1)
     hash_table = new HashTable<int>(table_size, fd);
   else if (op_seq == 2)
@@ -70,6 +70,7 @@ int main()
   int n11 = 29;
   int n12 = 30;
   int n13 = 51;
+  int n14 = 3;
 
   std::cout << ".....HashTable......" << std::endl;
   
@@ -123,6 +124,14 @@ int main()
 
   std::cout << "Insert n13 = " << n13 << " --> ";
   hash_table->Insert(n13);
+
+  std::cout << "Insert n14 = " << n14 << " --> ";
+  hash_table->Insert(n14);
+
+
+
+  std::cout << "Show table: " << std::endl;
+  std::cout << *hash_table << std::endl;
 
   return 0;
 }

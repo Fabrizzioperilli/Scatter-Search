@@ -1,5 +1,6 @@
 #include "../include/Sequence.h"
 #include <list>
+#include <iostream>
 
 template <class Key>
 class List : public Sequence<Key>
@@ -9,6 +10,7 @@ public:
   bool Search(const Key &) const override;
   bool Insert(const Key &) override;
   bool IsFull() const override;
+  std::ostream& Write(std::ostream&) const override;
 
 private:
   std::list<Key> list_;
@@ -41,4 +43,12 @@ template <class Key>
 bool List<Key>::IsFull() const
 {
   return false;
+}
+
+template <class Key>
+std::ostream& List<Key>::Write(std::ostream& os) const
+{
+  for (auto &i : list_)
+    os << i << " ";
+  return os;
 }

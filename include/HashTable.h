@@ -4,7 +4,15 @@
 #include "Sequence.h"
 #include "List.h"
 #include "Block.h"
+#include <iostream>
 #include <vector>
+
+template <class Key>
+class HashTable;
+
+template <class Key>
+std::ostream& operator<<(std::ostream&, const HashTable<Key>&);
+
 
 template <class Key>
 class HashTable
@@ -15,7 +23,8 @@ public:
   ~HashTable();
   bool Insert(const Key &) const;
   bool Search(const Key &) const;
-
+  std::ostream& Write(std::ostream&) const;
+  friend std::ostream& operator<< <Key>(std::ostream&, const HashTable<Key>&);
 private:
   DispersionFunction<Key> *fd_;
   ExplorationFunction<Key> *fe_;
@@ -130,4 +139,22 @@ bool HashTable<Key>::Search(const Key &k) const
     }
   }
   return false;
+}
+
+template <class Key>
+std::ostream& HashTable<Key>::Write(std::ostream& os) const
+{
+  for (size_t i = 0; i < table_size_; i++)
+  {
+    os << "\ni: " << i << " --> ";
+    table_[i]->Write(os);
+  }
+  
+  return os;
+}
+
+template <class Key>
+std::ostream& operator<<(std::ostream& os, const HashTable<Key>& ht)
+{
+  return ht.Write(os);
 }

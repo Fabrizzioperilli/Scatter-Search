@@ -10,6 +10,7 @@ public:
   bool Search(const Key &) const override;
   bool Insert(const Key &) override;
   bool IsFull() const override;
+  std::ostream& Write(std::ostream&) const override;
 
 private:
   unsigned block_size_;
@@ -46,4 +47,12 @@ template <class Key>
 bool Block<Key>::IsFull() const
 {
   return block_.size() == block_size_;
+}
+
+template <class Key>
+std::ostream& Block<Key>::Write(std::ostream& os) const
+{
+  for (auto &i : block_)
+    os << i << " ";
+  return os;
 }
