@@ -1,3 +1,14 @@
+/**
+ * @file HashTable.h
+ * @author Fabrizio Daniell Perilli Martín
+ * @brief Represents the HashTable class that allows searching and inserting elements and displaying them
+ * @version 0.1
+ * @date 2023-03-12
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #pragma once
 #include "DispersionFunction.h"
 #include "ExplorationFunction.h"
@@ -11,8 +22,7 @@ template <class Key>
 class HashTable;
 
 template <class Key>
-std::ostream& operator<<(std::ostream&, const HashTable<Key>&);
-
+std::ostream &operator<<(std::ostream &, const HashTable<Key> &);
 
 template <class Key>
 class HashTable
@@ -23,8 +33,9 @@ public:
   ~HashTable();
   bool Insert(const Key &) const;
   bool Search(const Key &) const;
-  std::ostream& Write(std::ostream&) const;
-  friend std::ostream& operator<< <Key>(std::ostream&, const HashTable<Key>&);
+  std::ostream &Write(std::ostream &) const;
+  friend std::ostream &operator<< <Key>(std::ostream &, const HashTable<Key> &);
+
 private:
   DispersionFunction<Key> *fd_;
   ExplorationFunction<Key> *fe_;
@@ -33,9 +44,23 @@ private:
   unsigned block_size_;
 };
 
+/**
+ * @brief Construct a new Hash Table< Key>:: Hash Table object
+ *
+ * @tparam Key
+ */
 template <class Key>
 HashTable<Key>::HashTable() {}
 
+/**
+ * @brief Construct a new Hash Table< Key>:: Hash Table object
+ *
+ * @tparam Key
+ * @param table_size
+ * @param fd
+ * @param fe
+ * @param block_size
+ */
 template <class Key>
 HashTable<Key>::HashTable(unsigned table_size, DispersionFunction<Key> *fd, ExplorationFunction<Key> *fe, unsigned block_size)
 {
@@ -53,6 +78,11 @@ HashTable<Key>::HashTable(unsigned table_size, DispersionFunction<Key> *fd, Expl
   }
 }
 
+/**
+ * @brief Destroy the Hash Table< Key>:: Hash Table object
+ *
+ * @tparam Key
+ */
 template <class Key>
 HashTable<Key>::~HashTable()
 {
@@ -60,6 +90,14 @@ HashTable<Key>::~HashTable()
     delete table_[i];
 }
 
+/**
+ * @brief Insert a key in the hash table
+ *
+ * @tparam Key
+ * @param k
+ * @return true
+ * @return false
+ */
 template <class Key>
 bool HashTable<Key>::Insert(const Key &k) const
 {
@@ -101,6 +139,14 @@ bool HashTable<Key>::Insert(const Key &k) const
   return false;
 }
 
+/**
+ * @brief Search a key in the hash table
+ *
+ * @tparam Key
+ * @param k
+ * @return true
+ * @return false
+ */
 template <class Key>
 bool HashTable<Key>::Search(const Key &k) const
 {
@@ -141,20 +187,35 @@ bool HashTable<Key>::Search(const Key &k) const
   return false;
 }
 
+/**
+ * @brief Write the hash table
+ *
+ * @tparam Key
+ * @param os
+ * @return std::ostream&
+ */
 template <class Key>
-std::ostream& HashTable<Key>::Write(std::ostream& os) const
+std::ostream &HashTable<Key>::Write(std::ostream &os) const
 {
   for (size_t i = 0; i < table_size_; i++)
   {
     os << "\ni: " << i << " --> ";
     table_[i]->Write(os);
   }
-  
+
   return os;
 }
 
+/**
+ * @brief Overload the operator << to write the hash table
+ *
+ * @tparam Key
+ * @param os
+ * @param ht
+ * @return std::ostream&
+ */
 template <class Key>
-std::ostream& operator<<(std::ostream& os, const HashTable<Key>& ht)
+std::ostream &operator<<(std::ostream &os, const HashTable<Key> &ht)
 {
   return ht.Write(os);
 }

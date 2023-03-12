@@ -1,3 +1,14 @@
+/**
+ * @file main.cc
+ * @author Fabrizzio Daniell Perilli Martín
+ * @brief This is the main program
+ * @version 0.1
+ * @date 2023-03-12
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include <iostream>
 #include "../include/FdModule.h"
 #include "../include/FdSum.h"
@@ -122,6 +133,10 @@ int main()
             break;
         }
     } while (option_menu != 0);
+
+
+    delete hash_table;
+    delete fd;
 
     return 0;
 }
