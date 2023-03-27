@@ -64,12 +64,20 @@ int main()
     else if (type_technique == 2)
     {
         unsigned block_size;
+        int op_ex;
 
         std::cout << "Enter the size of the block: ";
         std::cin >> block_size;
 
+        std::cout << "--Choose the exploration function you want to use: " << std::endl;
+        std::cout << "1. Lineal" << std::endl;
+        std::cout << "2. Quadratic " << std::endl;
+        std::cout << "3. Double dispersion " << std::endl;
+        std::cout << "4. Redispersion " << std::endl;
+        std::cout << "--Option:  ";
+        std::cin >> op_ex;
+
         ExplorationFunction<int> *fe;
-        int op_ex = 1;
         switch (op_ex)
         {
         case 1:
