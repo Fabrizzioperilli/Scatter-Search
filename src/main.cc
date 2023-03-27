@@ -10,6 +10,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include "../include/FdModule.h"
 #include "../include/FdSum.h"
 #include "../include/FdRandom.h"
@@ -129,8 +130,22 @@ int main()
             hash_table->Search(key);
             break;
         case 3:
+            int option;
             std::cout << "\nHash Table" << std::endl;
-            std::cout << *hash_table << std::endl;
+            std::cout << "1. You can see the table in the file 'output/table.txt' ?" << std::endl;
+            std::cout << "2. You can see the table in the console ?" << std::endl;
+            std::cout << "--Option: ";
+            std::cin >> option;
+            if (option == 1)
+            {
+                std::ofstream file;
+                file.open("output/table.txt");
+                file << "Hash Table" << std::endl;
+                file << *hash_table << std::endl;
+                file.close();
+            }
+            else if (option == 2)
+                std::cout << *hash_table << std::endl;
             break;
         case 0:
             exit(EXIT_SUCCESS);
@@ -141,7 +156,6 @@ int main()
             break;
         }
     } while (option_menu != 0);
-
 
     delete hash_table;
     delete fd;
